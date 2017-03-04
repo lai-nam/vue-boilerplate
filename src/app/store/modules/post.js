@@ -1,33 +1,8 @@
 import * as types from '../mutation-types'
+import Vue from 'vue'
 
 const state = {
-  all: [
-    {
-      title: 'title1',
-      body: 'body',
-      color: 'primary'
-    },
-    {
-      title: 'title1',
-      body: 'body',
-      color: 'success'
-    },
-    {
-      title: 'title1',
-      body: 'body',
-      color: 'success'
-    },
-    {
-      title: 'title1',
-      body: 'body',
-      color: 'info'
-    },
-    {
-      title: 'title1',
-      body: 'body',
-      color: 'success'
-    }
-  ]
+  all: []
 }
 
 const getters = {
@@ -36,14 +11,18 @@ const getters = {
 
 const actions = {
   getPost: function getPost ({ commit }) {
-    commit(types.POST_GET_POSTS)
+    Vue.http.get('http://localhost:1337/api/posts').then(response => {
+      // get body data
+      commit(types.POST_GET_POSTS, response.data)
+    }, response => {
+      // error callback
+    })
   }
 }
 
 const mutations = {
-  [types.POST_GET_POSTS] (mState) {
-    mState.all.pop()
-    mState.all.push({ postName: 'namlai111', title: 'newTitle', body: 'newBody', color: 'danger' })
+  [types.POST_GET_POSTS] (state, data) {
+    state.all = data
   }
 }
 export default {

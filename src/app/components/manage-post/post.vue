@@ -18,6 +18,7 @@ import { mapGetters, mapState, mapActions } from 'vuex'
 import nPagination from './../shared/pagination'
 import nPanel from './../shared/panel'
 import nSearch from './../shared/search'
+import nSearchTypeahead from './../shared/searchTypeahead.vue'
 
 export default {
   name: 'PostManager',
@@ -27,7 +28,7 @@ export default {
     ])
   },
 
-  components: { nPagination, nPanel, nSearch },
+  components: { nPagination, nPanel, nSearch, nSearchTypeahead },
   data () {
     return {
       mapGetters: mapGetters,
