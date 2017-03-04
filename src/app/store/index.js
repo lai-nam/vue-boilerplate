@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import post from './modules/post'
+import posts from './modules/post'
 
 Vue.use(Vuex)
 
@@ -10,7 +10,7 @@ export default new Vuex.Store({
   actions: {},
   getters: {},
   modules: {
-    post
+    posts
   },
   strict: debug
 })

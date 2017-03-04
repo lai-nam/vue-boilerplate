@@ -1,42 +1,37 @@
 import * as types from '../mutation-types'
 
 const state = {
-  posts: [
+  all: [
     {
-      postName: 'postName1'
+      title: 'title1',
+      body: 'body',
+      color: 'primary'
     },
     {
-      postName: 'postName2'
+      title: 'title1',
+      body: 'body',
+      color: 'success'
     },
     {
-      postName: 'postName3'
+      title: 'title1',
+      body: 'body',
+      color: 'success'
     },
     {
-      postName: 'postName4'
+      title: 'title1',
+      body: 'body',
+      color: 'info'
     },
     {
-      postName: 'postName5'
-    },
-    {
-      postName: 'postName6'
-    },
-    {
-      postName: 'postName7'
-    },
-    {
-      postName: 'postName8'
-    },
-    {
-      postName: 'postName9'
-    },
-    {
-      postName: 'postName10'
+      title: 'title1',
+      body: 'body',
+      color: 'success'
     }
   ]
 }
 
 const getters = {
-  allPost: st => st.posts
+  posts: st => st.all
 }
 
 const actions = {
@@ -47,7 +42,8 @@ const actions = {
 
 const mutations = {
   [types.POST_GET_POSTS] (mState) {
-    mState.posts.push({ postName: 'namlai111' })
+    mState.all.pop()
+    mState.all.push({ postName: 'namlai111', title: 'newTitle', body: 'newBody', color: 'danger' })
   }
 }
 export default {

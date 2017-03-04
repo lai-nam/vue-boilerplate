@@ -12,11 +12,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Dashboard',
-      component: Dashboard
-    },
-    {
       path: '/post',
       name: 'Post',
       component: ManagePost
@@ -41,7 +36,6 @@ export default new Router({
       name: 'AddressBook',
       component: ManageAddressBook
     },
-
     {
       path: '/*',
       name: 'Dashboard',

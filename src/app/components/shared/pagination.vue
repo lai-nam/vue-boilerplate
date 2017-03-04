@@ -1,19 +1,16 @@
 <template xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div>
-    <div v-for="data in currentData">
-      {{ data.postName }}
-    </div>
     <nav>
       <ul class="pagination pagination-sm">
         <li class="page-item">
-          <a class="page-link" href="#" tabindex="-1" v-on:click="(e) => {e.preventDefault(); goToPage(currentPage - 1)}">«</a>
+          <a class="page-link" href="#" tabindex="-1" v-on:click.prevent="goToPage(currentPage - 1)">«</a>
         </li>
         <li v-bind:class="{ active: page === currentPage }" v-for="page in upperPage" class="page-item">
           <a v-if="page === currentPage " class="page-link">
             {{page}}
             <span class="sr-only">(current)</span>
           </a>
-          <a v-else class="page-link" href="#" v-on:click="(e) => {e.preventDefault(); goToPage(page)}">
+          <a v-else class="page-link" href="#" v-on:click.prevent="goToPage(page)">
             {{page}}
           </a>
         </li>
@@ -29,7 +26,7 @@
 import * as types from '../../store/mutation-types'
 
 export default {
-  name: 'kbi-pagination',
+  name: 'n-pagination',
   computed: {
     upperPage () {
       return [...Array(this.pageRange).keys()]
@@ -58,10 +55,6 @@ export default {
   props: {
     config: {
       type: Object,
-      required: true
-    },
-    currentData: {
-      type: Array,
       required: true
     }
   },
