@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'kuppa-tab',
+  name: 'n-tab',
 
   data: function data () {
     return {

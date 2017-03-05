@@ -54,6 +54,9 @@ export default {
     searchSearchPost (searchCondition = {}) {
       return searchCondition
     }
+  },
+  mounted () {
+    console.log('post mounted')
   }
 }
 </script>

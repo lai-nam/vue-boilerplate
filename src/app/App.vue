@@ -1,26 +1,28 @@
 <template>
   <div id="app">
-    <kuppa-tabs></kuppa-tabs>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import KuppaTabs from './components/shared/tabs'
+import store from '@/app/store'
+import router from '@/app/router'
+import { mapState } from 'vuex'
 
 export default {
   name: 'app',
-  components: { KuppaTabs }
+  computed: {
+    ...mapState([
+      'user'
+    ])
+  },
+  store,
+  router,
+  mounted () {
+    if (this.user.token === '') {
+      console.log('Not Authenticated')
+      return
+    }
+  }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
