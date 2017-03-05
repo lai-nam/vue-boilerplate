@@ -47,7 +47,7 @@ export default {
 
     goToPage (pageNumber = 1) {
       // TODO: render data here
-      console.log('getPost', this.getPost('url'))
+      this.getPost('http://localhost:1337/api/posts')
       return pageNumber
     },
 

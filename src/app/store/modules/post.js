@@ -10,8 +10,8 @@ const getters = {
 }
 
 const actions = {
-  getPost: function getPost ({ commit }) {
-    Vue.http.get('http://localhost:1337/api/posts').then(response => {
+  getPost ({ commit }, url) {
+    Vue.http.get(url).then(response => {
       // get body data
       commit(types.POST_GET_POSTS, response.data)
     }, response => {
