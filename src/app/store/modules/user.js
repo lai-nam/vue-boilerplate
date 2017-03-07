@@ -1,12 +1,15 @@
 import * as types from '../mutation-types'
 import Vue from 'vue'
+import firebaseLogin from '@/app/services/auth/firebase-login'
 
 const state = {
-  token: ''
+  token: '',
+  loginErrMsg: ''
 }
 
 const getters = {
-  token: state => state.token
+  token: state => state.token,
+  loginErrMsg: state => state.loginErrMsg
 }
 
 const actions = {
@@ -15,8 +18,13 @@ const actions = {
   },
 
   loginAction ({ commit }, loginInfo) {
-    // TODO: send http request here
-    window.localStorage.setItem('login_token', 'namLai')
+    console.log('fireEventLOginAction')
+    firebaseLogin.signInWithEmailAndPassword(loginInfo, function (error) {
+      commit(types.USER_LOGIN_FAIL, error)
+    })
+  },
+
+  loginSuccess ({ commit }, userInfo) {
     commit(types.USER_LOGIN_SUCCESS)
   }
 }
@@ -26,13 +34,20 @@ const mutations = {
     state.token = token
   },
 
-  [types.USER_LOGIN_SUCCESS] (state) {
-    console.log('Vue', state)
+  [types.USER_LOGIN_SUCCESS] (state, userInfo) {
     Vue.router.push({
       name: 'post'
     })
+  },
+
+  [types.USER_LOGIN_FAIL] (state, error) {
+    state.loginErrMsg = error.message
+    Vue.router.push({
+      name: 'login'
+    })
   }
 }
+
 export default {
   state,
   getters,

@@ -1,7 +1,7 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <div class="container col-md-4 col-md-offset-4 login-layout">
-      <div class="panel panel-primary">
-        <div class="panel-heading text-center">Login</div>
+      <div class="panel" v-bind:class="loginStatus">
+        <div class="panel-heading text-center">{{this.user.loginErrMsg || 'Login'}}</div>
         <div class="panel-body">
           <form>
             <div class="form-group">
@@ -28,8 +28,7 @@
               </label>
             </div>
             <input type="button" class="btn btn-primary btn-block" value="Login"
-             v-on:click="login"
-             v-bind:class="loginCond">
+             v-on:click="loginAction(loginInfo)">
             <router-link :to="{ path: 'forgot-password' }">
               <p class="text-center forgot-password">Forgot password</p>
             </router-link>
@@ -40,11 +39,12 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
   import store from '@/app/store'
 
   export default {
     name: 'login',
+    store,
     data () {
       return {
         username: '',
@@ -52,33 +52,35 @@
         isRememberMe: false
       }
     },
-    store,
     computed: {
-      loginCond: function () {
+      loginStatus () {
+        const panelPrimary = this.user.loginErrMsg === ''
         return {
-          disabled: !this.username || !this.password
+          'panel-primary': panelPrimary,
+          'panel-danger': !panelPrimary
         }
       },
+
       loginInfo () {
         return {
           username: this.username,
           password: this.password,
           isRememberMe: this.isRememberMe
         }
-      }
+      },
+      ...mapState([
+        'user'
+      ])
     },
 
     methods: {
       ...mapActions({
         loginAction: 'loginAction'
-      }),
-      login () {
-        this.loginAction(this.loginInfo)
-      }
+      })
     }
   }
-</script>
 
+</script>
 
 <style scoped>
   .forgot-password {
